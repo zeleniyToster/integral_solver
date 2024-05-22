@@ -4,10 +4,14 @@
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("Вычисляем интеграл из функции (x-1)^2 в области от 1 до 2.");
-      var cm = new CalculatingModule(1, 2);
-      var res = cm.TrapezoidMethod(cm.MainFunction);
-      Console.WriteLine($"Результат вычисления интеграла: {res}");
+      int.TryParse(args[2], out int lowerBound);
+      int.TryParse(args[1], out int upperBound);
+      string rawExpression = args[0];
+      var parserMathFunctions = new ParserMathFunctions();
+      var expression = parserMathFunctions.parseExpression(rawExpression);
+      var calculatingModule = new CalculatingModule(lowerBound, upperBound, expression);
+      var result = calculatingModule.TrapezoidMethod(calculatingModule.MainFunctionAsString);
+      Console.WriteLine($"Результат вычисления интеграла: {result}");
     }
   }
 }
