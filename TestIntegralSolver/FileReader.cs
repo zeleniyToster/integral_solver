@@ -8,19 +8,12 @@ namespace TestIntegralSolver
 {
   internal class FileReader
   {
-    public string filePath {  get; private set; }
-
-    public FileReader(string filePath)
-    {
-      this.filePath = filePath;
-    }
-
-    public string[] Read()
+    public static string[] Read(string filePath)
     {
       string[] fileContent;
-      using (StreamReader streamReader = new StreamReader(this.filePath))
+      using (StreamReader streamReader = new StreamReader(filePath))
       {
-        fileContent = streamReader.ReadToEnd().Split("\n");
+        fileContent = streamReader.ReadToEnd().Replace("\r","").Split("\n");
       }
 
       return fileContent;
