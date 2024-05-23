@@ -1,9 +1,4 @@
 ﻿using NCalc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegralSolver
 {
@@ -49,14 +44,9 @@ namespace IntegralSolver
     public double TrapezoidMethod(MathFunctionDelegate f)
     {
       double res, sum = 0;
-      var reslist = new List<double>(); // для отладки
-      var ilist = new List<double>();  // для отладки
-      for (double i = this.lowerBound + this.step; i <= this.upperBound; )
+      for (double i = this.lowerBound + this.step; i <= this.upperBound; i = Math.Round(i + this.step, 6))
       {
-        ilist.Add(i);  // для отладки
         sum += (f(i - this.step) + f(i)) / 2;
-        reslist.Add(sum);  // для отладки
-        i = Math.Round(i + this.step, 6);
       }
         
       res = Math.Round(sum * this.step, 6);
