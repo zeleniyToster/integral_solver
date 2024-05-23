@@ -44,12 +44,12 @@ namespace IntegralSolver
     public double TrapezoidMethod(MathFunctionDelegate f)
     {
       double res, sum = 0;
-      for (double i = this.lowerBound + this.step; i <= this.upperBound; i = Math.Round(i + this.step, 6))
+      for (double i = this.lowerBound + this.step; i <= this.upperBound; i = Math.Round(i + this.step, 3))
       {
         sum += (f(i - this.step) + f(i)) / 2;
       }
         
-      res = Math.Round(sum * this.step, 6);
+      res = Math.Round(sum * this.step, 3);
       return res;
     }
 

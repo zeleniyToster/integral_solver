@@ -11,7 +11,7 @@
       var expression = parserMathFunctions.parseExpression(rawExpression);
       var calculatingModule = new CalculatingModule(lowerBound, upperBound, expression);
       var result = calculatingModule.TrapezoidMethod(calculatingModule.MainFunctionAsString);
-      Console.WriteLine($"Результат вычисления интеграла {rawExpression}: {result}");
+      Console.WriteLine($"{result}");
     }
   }
 }
