@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 
 namespace TestIntegralSolver
 {
@@ -6,14 +7,15 @@ namespace TestIntegralSolver
   {
     static void Main(string[] args)
     {
-      var filePath = args[0];
-      var fileContent = FileReader.Read(filePath);
+      var testCaseFilePath = args[0];
+      var integralSolverFileName = "IntegralSolver.exe";
+      var fileContent = FileReader.Read(testCaseFilePath);
       var procesesOutput = new List<string?>();
       var process = new Process();
       Console.WriteLine(6.394.Equals(6.394));
       process.StartInfo.UseShellExecute = false;
       process.StartInfo.RedirectStandardOutput = true;
-      process.StartInfo.FileName = @"H:\Projects\integral_solver\IntegralSolver\bin\Debug\net6.0\IntegralSolver.exe";
+      process.StartInfo.FileName = filePath(integralSolverFileName);
       foreach ( var item in fileContent )
       {
         process.StartInfo.Arguments = item;
@@ -35,13 +37,16 @@ namespace TestIntegralSolver
         if (!procesesOutput[i].Equals(splitedFileContent[^1]))
         {
           Console.WriteLine("Ответы не совпадают, более подробная информация ниже:");
-          Console.WriteLine($"Функция - {splitedFileContent[0]}, нижняя граница - {splitedFileContent[1]}, верхняя граница - {splitedFileContent[2]}");
+          Console.WriteLine($"Функция - {splitedFileContent[0]}, верхняя граница - {splitedFileContent[1]}, нижняя граница - {splitedFileContent[2]}");
           Console.WriteLine($"Ответ из файла с решением: {splitedFileContent[^1]}, Ответ из программы - {procesesOutput[i]}");
           break;
         }
-        Console.WriteLine($"Функция - {splitedFileContent[0]}, нижняя граница - {splitedFileContent[1]}, верхняя граница - {splitedFileContent[2]}");
+        Console.WriteLine($"Функция - {splitedFileContent[0]}, верхняя граница - {splitedFileContent[1]}, нижняя граница - {splitedFileContent[2]}");
         Console.WriteLine($"Ответ из файла с решением: {splitedFileContent[^1]}, Ответ из программы - {procesesOutput[i]}");
       }
     }
+
+    static string filePath(string fileName) => Path.GetFullPath(fileName);
+
   }
 }
